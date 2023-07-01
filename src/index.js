@@ -1,10 +1,15 @@
+
 import axios from "axios";
 axios.defaults.headers.common["x-api-key"] = "live_Zyc15vsLWME0Ezyn0SJRdTL6JLoPr05b7FKFL0hoUfqyA7hZM7EbWXAYmNtcprir";
-
 
 function fetchBreeds() {
   const breedSelect = document.querySelector(".breed-select");
   const loader = document.querySelector(".loader");
+  const errorElement = document.querySelector(".error");
+
+  loader.textContent = "Loading data, please wait...";
+  loader.style.display = "block";
+  errorElement.style.display = "none";
 
   axios
     .get("https://api.thecatapi.com/v1/breeds")
@@ -29,9 +34,12 @@ function fetchBreeds() {
 function fetchCatByBreed(breedId) {
   const catInfo = document.querySelector(".cat-info");
   const loader = document.querySelector(".loader");
+  const errorElement = document.querySelector(".error");
 
-    
-    
+  loader.textContent = "Loading data, please wait...";
+  loader.style.display = "block";
+  errorElement.style.display = "none";
+
   axios
     .get(`https://api.thecatapi.com/v1/images/search?breed_ids=${breedId}`)
     .then((response) => {
@@ -65,6 +73,9 @@ function fetchCatByBreed(breedId) {
 
 function showError() {
   const errorElement = document.querySelector(".error");
+  const loader = document.querySelector(".loader");
+  loader.style.display = "none";
+  errorElement.textContent = "Oops! Something went wrong! Try reloading the page!";
   errorElement.style.display = "block";
 }
 fetchBreeds();
@@ -74,4 +85,3 @@ breedSelect.addEventListener("change", (event) => {
   const selectedBreedId = event.target.value;
   fetchCatByBreed(selectedBreedId);
 });
-
