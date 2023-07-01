@@ -79,7 +79,6 @@ function showError() {
   errorElement.style.display = "block";
 }
 fetchBreeds();
-
 const breedSelect = document.querySelector(".breed-select");
 breedSelect.addEventListener("change", (event) => {
   const selectedBreedId = event.target.value;
